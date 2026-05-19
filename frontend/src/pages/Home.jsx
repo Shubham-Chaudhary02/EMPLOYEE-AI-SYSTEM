@@ -10,8 +10,9 @@ function Home() {
       </h1>
 
       <p>
-        Smart AI powered HR platform for employee management,
-        analytics, promotion recommendations and performance tracking.
+        Smart AI powered HR platform for employee
+        management, analytics, promotion recommendations,
+        employee ranking and performance tracking.
       </p>
 
       <Link to="/employees">
@@ -28,7 +29,7 @@ function Home() {
 
         <div className="stats-card">
           <h2>AI</h2>
-          <p>Smart Recommendations</p>
+          <p>AI Powered Recommendations</p>
         </div>
 
         <div className="stats-card">
