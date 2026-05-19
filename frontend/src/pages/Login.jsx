@@ -23,11 +23,19 @@ function Login() {
         formData
       );
 
-      localStorage.setItem("token", data.token);
+      localStorage.setItem(
+        "token",
+        data.token
+      );
 
       alert("Login Successful");
     } catch (error) {
-      alert(error.response.data.message);
+      console.log(error);
+
+      alert(
+        error?.response?.data?.message ||
+          "Login Failed"
+      );
     }
   };
 
@@ -51,7 +59,9 @@ function Login() {
             onChange={handleChange}
           />
 
-          <button>Login</button>
+          <button type="submit">
+            Login
+          </button>
         </form>
       </div>
     </div>

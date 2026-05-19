@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL:
+    "https://employee-ai-backend-8fgy.onrender.com",
 });
 
 export default API;

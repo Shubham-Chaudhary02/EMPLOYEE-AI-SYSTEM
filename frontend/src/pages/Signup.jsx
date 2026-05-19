@@ -19,11 +19,21 @@ function Signup() {
     e.preventDefault();
 
     try {
-      await API.post("/auth/signup", formData);
+      const { data } = await API.post(
+        "/auth/signup",
+        formData
+      );
+
+      console.log(data);
 
       alert("Signup Successful");
     } catch (error) {
-      alert(error.response.data.message);
+      console.log(error);
+
+      alert(
+        error?.response?.data?.message ||
+          "Signup Failed"
+      );
     }
   };
 
@@ -54,7 +64,9 @@ function Signup() {
             onChange={handleChange}
           />
 
-          <button>Signup</button>
+          <button type="submit">
+            Signup
+          </button>
         </form>
       </div>
     </div>
