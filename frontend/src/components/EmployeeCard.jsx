@@ -5,30 +5,34 @@ function EmployeeCard({ employee }) {
     <div className="card">
       <h2>{employee.name}</h2>
 
-      <p>{employee.email}</p>
-
       <p>
-        <strong>Department:</strong>{" "}
-        {employee.department}
+        <strong>Email:</strong> {employee.email}
       </p>
 
       <p>
-        <strong>Score:</strong>{" "}
+        <strong>Department:</strong> {employee.department}
+      </p>
+
+      <p>
+        <strong>Performance Score:</strong>
         {employee.performanceScore}
       </p>
 
       <p>
-        <strong>Experience:</strong>{" "}
+        <strong>Experience:</strong>
         {employee.experience} Years
       </p>
 
-      <button>
-        <Link
-          to={`/recommendation/${employee._id}`}
-        >
-          AI Recommendation
-        </Link>
-      </button>
+      <p>
+        <strong>Skills:</strong>
+        {employee.skills.join(", ")}
+      </p>
+
+      <Link to={`/recommendation/${employee._id}`}>
+        <button>
+          Generate AI Recommendation
+        </button>
+      </Link>
     </div>
   );
 }

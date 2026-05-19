@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-
 import { useParams } from "react-router-dom";
-
 import API from "../services/api";
 
 function Recommendation() {
   const { id } = useParams();
 
   const [recommendation, setRecommendation] =
-    useState("");
+    useState("Loading AI Recommendation...");
 
   useEffect(() => {
     fetchRecommendation();
@@ -20,10 +18,9 @@ function Recommendation() {
         "/employees"
       );
 
-      const employee =
-        employeeRes.data.find(
-          (emp) => emp._id === id
-        );
+      const employee = employeeRes.data.find(
+        (emp) => emp._id === id
+      );
 
       const { data } = await API.post(
         "/ai/recommend",
@@ -35,6 +32,10 @@ function Recommendation() {
       setRecommendation(data.recommendation);
     } catch (error) {
       console.log(error);
+
+      setRecommendation(
+        "Failed to load AI recommendation"
+      );
     }
   };
 
@@ -45,14 +46,9 @@ function Recommendation() {
           AI Recommendation
         </h1>
 
-        <p
-          style={{
-            lineHeight: "2",
-            whiteSpace: "pre-wrap",
-          }}
-        >
+        <div className="ai-box">
           {recommendation}
-        </p>
+        </div>
       </div>
     </div>
   );
