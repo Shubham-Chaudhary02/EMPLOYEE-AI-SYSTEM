@@ -5,19 +5,22 @@ const getRecommendation = async (req, res) => {
     const { employee } = req.body;
 
     const prompt = `
-    Analyze employee performance.
+You are an HR AI assistant.
 
-    Name: ${employee.name}
-    Department: ${employee.department}
-    Skills: ${employee.skills}
-    Performance Score: ${employee.performanceScore}
-    Experience: ${employee.experience}
+Analyze this employee:
 
-    Give:
-    1. Promotion Recommendation
-    2. Training Suggestions
-    3. Feedback
-    `;
+Name: ${employee.name}
+Department: ${employee.department}
+Skills: ${employee.skills.join(", ")}
+Performance Score: ${employee.performanceScore}
+Experience: ${employee.experience}
+
+Give:
+1. Promotion Recommendation
+2. Training Suggestions
+3. Improvement Feedback
+4. Employee Ranking Insight
+`;
 
     const response = await axios.post(
       "https://openrouter.ai/api/v1/chat/completions",
@@ -34,6 +37,8 @@ const getRecommendation = async (req, res) => {
       {
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "HTTP-Referer": "http://localhost:5173",
+          "X-Title": "AI HR System",
           "Content-Type": "application/json",
         },
       }
@@ -44,7 +49,9 @@ const getRecommendation = async (req, res) => {
         response.data.choices[0].message.content,
     });
   } catch (error) {
-    console.log(error.response?.data || error.message);
+    console.log(
+      error.response?.data || error.message
+    );
 
     res.status(500).json({
       message: "AI recommendation failed",
